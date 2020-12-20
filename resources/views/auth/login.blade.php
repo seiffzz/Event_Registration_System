@@ -34,9 +34,9 @@
                         <span class="ml-2 text-sm text-gray-600">{{ __('Show Password') }}</span>
                     </label>
                 </div>
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    {{ __('Don\'t Have an Account?') }}
-                </a>
+{{--                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">--}}
+{{--                    {{ __('Don\'t Have an Account?') }}--}}
+{{--                </a>--}}
             </div>
 
 

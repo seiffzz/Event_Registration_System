@@ -17,17 +17,17 @@ class Delegate extends Model
 
     public static function get_registered()
     {
-        return DB::table('delegates')->where('deleted', '=', 0)->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies', 'received_payment_mail', 'paid', 'received_confirmation_mail', 'checked_in')->get()->toArray();
+        return DB::table('delegates')->where('deleted', '=', 0)->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies',  'paid',  'checked_in' , 'checked_out', 'created_at')->get()->toArray();
     }
 
     public static function get_paid()
     {
-        return DB::table('delegates')->where([['deleted', '=', 0], ['paid', '=', 1]])->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies', 'received_payment_mail', 'paid', 'received_confirmation_mail', 'checked_in')->get()->toArray();
+        return DB::table('delegates')->where([['deleted', '=', 0], ['paid', '=', 1]])->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies',  'paid',  'checked_in' , 'checked_out', 'created_at')->get()->toArray();
     }
 
     public static function get_unpaid()
     {
-        return DB::table('delegates')->where([['deleted', '=', 0], ['paid', '=', 0]])->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies', 'received_payment_mail', 'paid', 'received_confirmation_mail', 'checked_in')->get()->toArray();
+        return DB::table('delegates')->where([['deleted', '=', 0], ['paid', '=', 0]])->select('name', 'email', 'phone_number', 'gender', 'dob', 'role', 'function', 'allergies',  'paid',  'checked_in' , 'checked_out', 'created_at')->get()->toArray();
     }
 
 }

@@ -21,10 +21,10 @@ class DelegateExport implements FromCollection,WithHeadings
             'Role',
             'Function',
             'Allergies',
-            'Received Payment Mail',
             'Paid',
-            'Received Confirmation Mail',
-            'Checked-In'
+            'Checked-In',
+            'Checked_out',
+            'Registered At'
         ];
     }
 

@@ -40,9 +40,9 @@
                                 <select id="gender" name="gender"
                                         class="mt-1 block w-full form-input" style="height:44px;">
                                     <option value="Male "
-                                            @if(old('gender')==='Male'||$delegate->gender ==='Male')selected @endif>{{__('Male')}}</option>
+                                            @if(old('gender')=='Male'||$delegate->gender =='Male')selected @endif>{{__('Male')}}</option>
                                     <option value="Female "
-                                            @if(old('gender')==='Female' || $delegate->gender === 'Female')selected @endif>{{__('Female')}}</option>
+                                            @if(old('gender')=='Female' || $delegate->gender == 'Female')selected @endif>{{__('Female')}}</option>
                                 </select>
                             </div>
                             <div class="mt-6">
@@ -78,31 +78,29 @@
                             <x-jet-label for="function" value="{{ __('Role') }}"/>
                             <select name="role" id="role" class="mt-1 block w-full form-input" style="height: 44px"
                                     onclick="show()">
-                                <option value="Newbie"
-                                        @if(old("role") === 'Newbie' || $delegate->role === 'Newbie')selected @endif>
-                                    Newbie
+                                <option value="New Member"
+                                        @if(old("role") == 'New Member' || $delegate->role == 'New Member')selected @endif>
+                                    New Member
+                                </option>
+                                <option value="Old Member"
+                                        @if(old("role") == 'Old Member' || $delegate->role == 'Old Member')selected @endif>
+                                    Old Member
                                 </option>
                                 <option value="TL"
-                                        @if(old("role") === 'TL' || $delegate->role === 'TL')selected @endif>TL
+                                        @if(old("role") == 'TL' || $delegate->role == 'TL')selected @endif>TL
                                 </option>
                                 <option value="Coordinator"
-                                        @if(old("role") === 'Coordinator' || $delegate->role === 'Coordinator')selected @endif>
+                                        @if(old("role") == 'Coordinator' || $delegate->role == 'Coordinator')selected @endif>
                                     Coordinator
                                 </option>
                                 <option value="LCVP"
-                                        @if(old("role") === 'LCVP' || $delegate->role === 'LCVP')selected @endif>
+                                        @if(old("role") == 'LCVP' || $delegate->role == 'LCVP')selected @endif>
                                     LCVP
                                 </option>
                                 <option value="LCP"
-                                        @if(old("role") === 'LCP' || $delegate->role === 'LCP')selected @endif>LCP
+                                        @if(old("role") == 'LCP' || $delegate->role == 'LCP')selected @endif>LCP
                                 </option>
-                                <option value="MCVP"
-                                        @if(old("role") === 'MCVP' || $delegate->role === 'MCVP')selected @endif>
-                                    MCVP
-                                </option>
-                                <option value="MCP"
-                                        @if(old("role") === 'MCP' || $delegate->role === 'MCP')selected @endif>MCP
-                                </option>
+
                             </select>
                         </div>
                         <div class="mt-6 hidden" id="function-dropdown">
@@ -111,40 +109,48 @@
                                 class="mt-1 block w-full form-input" style="height:44px;" id="grid-gender"
                                 name="function">
                                 <option value="IGV"
-                                        @if(old("role") === 'IGV' || $delegate->role === 'IGV')selected @endif>IGV
+                                        @if(old("function") == 'IGV' || $delegate->function == 'IGV')selected @endif>IGV
                                 </option>
                                 <option value="IGTe"
-                                        @if(old("role") === 'IGTe' || $delegate->role === 'IGTe')selected @endif>IGTe
+                                        @if(old("function") == 'IGTe' || $delegate->function == 'IGTe')selected @endif>
+                                    IGTe
                                 </option>
                                 <option value="IGTa"
-                                        @if(old("role") === 'IGTa' || $delegate->role === 'IGTa')selected @endif>IGTa
+                                        @if(old("function") == 'IGTa' || $delegate->function == 'IGTa')selected @endif>
+                                    IGTa
                                 </option>
                                 <option value="OGTa"
-                                        @if(old("role") === 'OGTa' || $delegate->role === 'OGTa')selected @endif>OGTa
+                                        @if(old("function") == 'OGTa' || $delegate->function == 'OGTa')selected @endif>
+                                    OGTa
                                 </option>
                                 <option value="OGTe"
-                                        @if(old("role") === 'OGTe' || $delegate->role === 'OGTe')selected @endif>OGTe
+                                        @if(old("function") == 'OGTe' || $delegate->function == 'OGTe')selected @endif>
+                                    OGTe
                                 </option>
                                 <option value="OGV"
-                                        @if(old("role") === 'OGV' || $delegate->role === 'OGV')selected @endif>OGV
+                                        @if(old("function") == 'OGV' || $delegate->function == 'OGV')selected @endif>OGV
                                 </option>
                                 <option value="TM"
-                                        @if(old("role") === 'TM' || $delegate->role === 'TM')selected @endif>TM
+                                        @if(old("function") == 'TM' || $delegate->function == 'TM')selected @endif>TM
                                 </option>
                                 <option value="PD"
-                                        @if(old("role") === 'PD' || $delegate->role === 'PD')selected @endif>PD
+                                        @if(old("function") == 'PD' || $delegate->function == 'PD')selected @endif>PD
                                 </option>
                                 <option value="Finance"
-                                        @if(old("role") === 'Finance' || $delegate->role === 'Finance')selected @endif>
+                                        @if(old("function") == 'Finance' || $delegate->function == 'Finance')selected @endif>
                                     Finance
                                 </option>
                                 <option value="BCX ICX"
-                                        @if(old("role") === 'BCX ICX' || $delegate->role === 'BCX ICX')selected @endif>
+                                        @if(old("function") == 'BCX ICX' || $delegate->function == 'BCX ICX')selected @endif>
                                     BCX ICX
                                 </option>
                                 <option value="BCX OGX"
-                                        @if(old("role") === 'BCX OGX' || $delegate->role === 'BCX OGX')selected @endif>
+                                        @if(old("function") == 'BCX OGX' || $delegate->function == 'BCX OGX')selected @endif>
                                     BCX OGX
+                                </option>
+                                <option value="R&D"
+                                        @if(old("function") == 'R&D' || $delegate->function == 'R&D')selected @endif>
+                                    R&D
                                 </option>
                             </select>
 
@@ -189,6 +195,24 @@
         };
 
         reader.readAsDataURL(input.files[0]);
+    }
+
+    function show() {
+        var role = document.getElementById('role').value;
+        if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+            document.getElementById('function-dropdown').className = 'mt-6'
+        } else {
+            document.getElementById('function-dropdown').className = 'mt-6 hidden'
+        }
+    }
+
+    window.onload = function () {
+        var role = document.getElementById('role').value;
+        if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+            document.getElementById('function-dropdown').className = 'mt-6'
+        } else {
+            document.getElementById('function-dropdown').className = 'mt-6 hidden'
+        }
     }
 
 </script>

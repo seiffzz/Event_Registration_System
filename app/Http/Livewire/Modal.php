@@ -6,8 +6,13 @@ use Livewire\Component;
 
 class Modal extends Component
 {
+    public $room_id;
+
     public function render()
     {
-        return view('livewire.modal');
+        $room_id = $this->room_id;
+        return view('livewire.modal',compact('room_id'));
     }
+
+
 }

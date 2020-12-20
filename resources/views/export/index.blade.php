@@ -7,9 +7,11 @@
             @if(\Illuminate\Support\Facades\Session::has('error'))
                 <div
                     class="px-3 bg-red-200 text-red-500 rounded alert">{{\Illuminate\Support\Facades\Session::get('error')}}</div>
+                {{\Illuminate\Support\Facades\Session::forget('error')}}
             @elseif(\Illuminate\Support\Facades\Session::has('success'))
                 <div
                     class="px-3 bg-green-200 text-green-500 rounded alert">{{\Illuminate\Support\Facades\Session::get('success')}}</div>
+                {{\Illuminate\Support\Facades\Session::forget('success')}}
             @endif
         </div>
 

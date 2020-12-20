@@ -8,10 +8,12 @@
                 <div
                     class="px-3 bg-red-200 text-red-500 rounded alert lg:block hidden">{{\Illuminate\Support\Facades\Session::get('error')}}</div>
                 <div class="px-3 bg-red-200 text-red-500 rounded alert lg:hidden block">Error!</div>
+                {{\Illuminate\Support\Facades\Session::forget('error')}}
             @elseif(\Illuminate\Support\Facades\Session::has('success'))
                 <div
                     class="px-3 bg-green-200 text-green-500 rounded alert lg:block hidden">{{\Illuminate\Support\Facades\Session::get('success')}}</div>
                 <div class="px-3 bg-green-200 text-green-500 rounded alert lg:hidden block">Success!</div>
+                {{\Illuminate\Support\Facades\Session::forget('success')}}
             @endif
         </div>
 
@@ -31,19 +33,19 @@
                         </button>
                         <button
                             class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"
-                            type="submit" form="form" id="print" onclick="select_operation('print')">Print Room
+                            type="submit" form="form" id="print" onclick="select_operation('create_room')">Create Room
                         </button>
-                        <button
-                            class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"
-                            type="submit" form="form" id="payment_mail" onclick="select_operation('payment_mail')">Send
-                            Payment Mail
-                        </button>
-                        <button
-                            class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"
-                            type="submit" form="form" id="confirmation_mail"
-                            onclick="select_operation('confirmation_mail')">Send
-                            Confirmation Mail
-                        </button>
+                        {{--                        <button--}}
+                        {{--                            class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"--}}
+                        {{--                            type="submit" form="form" id="payment_mail" onclick="select_operation('payment_mail')">Send--}}
+                        {{--                            Payment Mail--}}
+                        {{--                        </button>--}}
+                        {{--                        <button--}}
+                        {{--                            class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"--}}
+                        {{--                            type="submit" form="form" id="confirmation_mail"--}}
+                        {{--                            onclick="select_operation('confirmation_mail')">Send--}}
+                        {{--                            Confirmation Mail--}}
+                        {{--                        </button>--}}
                         @role('admin')
                         <button
                             class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"
@@ -73,11 +75,12 @@
                         </button>
                         @endrole
 
+
+                        @role('admin')
                         <button
                             class="px-3 text-sm py-2 text-center bg-blue-500 rounded font-bold text-white  mr-3 hover:bg-blue-400"
                             type="submit" form="form" id="edit" onclick="select_operation('edit')">Edit
                         </button>
-                        @role('admin')
                         <button
                             class="px-3 text-sm py-2 text-center bg-red-500 rounded font-bold text-white  hover:bg-red-400"
                             type="submit"
@@ -86,7 +89,7 @@
                         @endrole
 
                     </div>
-                    <form action="{{route('delegates.room_print')}}" id="form">
+                    <form action="{{route('delegates.index')}}" id="form">
                         <table id="example" class="hover row-border" style="width:100%">
                             <thead>
                             <tr>
@@ -99,11 +102,11 @@
                                 <th class="text-center">Role</th>
                                 {{--<th class="text-center">Function</th>--}}
                                 {{--<th class="text-center">Event</th>--}}
-                                <th class="text-center">Received Payment Mail</th>
+                                {{--<th class="text-center">Received Payment Mail</th>--}}
                                 <th class="text-center">Paid</th>
-                                <th class="text-center">Received Confirmation Mail</th>
+                                {{--<th class="text-center">Received Confirmation Mail</th>--}}
                                 <th class="text-center">Checked In</th>
-                                <th class="text-center">Meals Counter</th>
+                                {{--<th class="text-center">Meals Counter</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -121,15 +124,14 @@
                                     <th class="text-center">{{$delegate->role}}</th>
                                     {{--<th class="text-center">{{$delegate->function}}</th>--}}
                                     {{--<th class="text-center">{{$delegate->event}}</th>--}}
-                                    <th class="justify-center">@if($delegate->received_payment_mail == 1)<img
-                                            src="{{asset('storage/images/check.svg')}}" alt="" width="20px"
-                                            height="20px" style="height: 64px;margin: auto">
-                                        <div class="hidden">yespaymentmail</div> @else <img
-                                            src="{{asset('storage/images/cancel-mark.svg')}}"
-                                            alt="" width="20px" height="20px" style="height: 64px;margin: auto">
-                                        <div class="hidden">nopaymentmail</div> @endif
-
-                                    </th>
+                                    {{--<th class="justify-center">@if($delegate->received_payment_mail == 1)<img--}}
+                                    {{--src="{{asset('storage/images/check.svg')}}" alt="" width="20px"--}}
+                                    {{--height="20px" style="height: 64px;margin: auto">--}}
+                                    {{--<div class="hidden">yespaymentmail</div> @else <img--}}
+                                    {{--src="{{asset('storage/images/cancel-mark.svg')}}"--}}
+                                    {{--alt="" width="20px" height="20px" style="height: 64px;margin: auto">--}}
+                                    {{--<div class="hidden">nopaymentmail</div> @endif--}}
+                                    {{--</th>--}}
                                     <th class="justify-center">@if($delegate->paid == 1)<img
                                             src="{{asset('storage/images/check.svg')}}" alt="" width="20px"
                                             height="20px" style="height: 64px;margin: auto">
@@ -137,14 +139,14 @@
                                             src="{{asset('storage/images/cancel-mark.svg')}}"
                                             alt="" width="20px" style="height: 64px;margin: auto">
                                         <div class="hidden">nopaid</div> @endif</th>
-                                    <th class="justify-center">@if($delegate->received_confirmation_mail == 1)<img
-                                            src="{{asset('storage/images/check.svg')}}" alt="" width="20px"
-                                            height="20px" style="height: 64px;margin: auto">
-                                        <div class="hidden">yesconfirmationmail</div> @else <img
-                                            src="{{asset('storage/images/cancel-mark.svg')}}"
-                                            alt="" width="20px" height="20px" style="height: 64px;margin: auto">
-                                        <div class="hidden">noconfirmationmail</div> @endif
-                                    </th>
+                                    {{--<th class="justify-center">@if($delegate->received_confirmation_mail == 1)<img--}}
+                                    {{--src="{{asset('storage/images/check.svg')}}" alt="" width="20px"--}}
+                                    {{--height="20px" style="height: 64px;margin: auto">--}}
+                                    {{--<div class="hidden">yesconfirmationmail</div> @else <img--}}
+                                    {{--src="{{asset('storage/images/cancel-mark.svg')}}"--}}
+                                    {{--alt="" width="20px" height="20px" style="height: 64px;margin: auto">--}}
+                                    {{--<div class="hidden">noconfirmationmail</div> @endif--}}
+                                    {{--</th>--}}
                                     <th class="justify-center">@if($delegate->checked_in == 1)<img
                                             src="{{asset('storage/images/check.svg')}}" alt="" width="20px"
                                             height="20px" style="height: 64px;margin: auto">
@@ -153,7 +155,7 @@
                                             alt="" width="20px" height="20px" style="height: 64px;margin: auto">
                                         <div class="hidden">nocheckin</div> @endif
                                     </th>
-                                    <th class="justify-center">{{$delegate->meals_counter}}</th>
+                                    {{--<th class="justify-center">{{$delegate->meals_counter}}</th>--}}
                                 </tr>
                             @endforeach
                             </tbody>
@@ -167,8 +169,8 @@
 </x-app-layout>
 <script>
     function select_operation(operation) {
-        if (operation == 'print') {
-            document.getElementById('form').action = '{{route('delegates.room_print')}}'
+        if (operation == 'create_room') {
+            document.getElementById('form').action = '{{route('rooms.create_room')}}'
             // document.getElementById('form').target = 'blank'
         } else if (operation == 'paid') {
             document.getElementById('form').action = '{{route('delegates.mark_paid')}}'

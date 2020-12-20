@@ -28,7 +28,13 @@ class DelegateController extends Controller
         if (count($request->selected) > 2) {
             return redirect()->back()->with(['error' => 'Please Select Exactly 2 Delegates!']);
         }
-
+        if (count($request->selected) != 1) {
+            $delegate1_gender = DB::table('delegates')->where('id', '=', $request->selected[0])->select('gender')->get()->first()->gender;
+            $delegate2_gender = DB::table('delegates')->where('id', '=', $request->selected[1])->select('gender')->get()->first()->gender;
+            if ($delegate1_gender != $delegate2_gender) {
+                return redirect()->back()->with(['error' => 'Cannot Room Delegates With Different Gender!']);
+            }
+        }
         $data = array();
         $counter = 0;
 
@@ -55,12 +61,13 @@ class DelegateController extends Controller
         $counter = 0;
         foreach ($request->selected as $i => $iValue) {
             $delegate = DB::table('delegates')->where('id', '=', $iValue);
-            if ($delegate->get()->first()->received_payment_mail == 1) {
-                $delegate->update(['paid' => 1]);
-            } else {
-                $error_free = false;
-                $error_indexes[$counter++] = $i + 1;
-            }
+//            if ($delegate->get()->first()->received_payment_mail == 1) {
+//                $delegate->update(['paid' => 1]);
+//            } else {
+//                $error_free = false;
+//                $error_indexes[$counter++] = $i + 1;
+//            }
+            $delegate->update(['paid' => 1]);
         }
         if ($error_free) {
             return redirect()->back()->with(['success' => 'Delegate(s) Marked Paid Successfully!']);
@@ -184,10 +191,10 @@ class DelegateController extends Controller
     public function edit_delegate(Request $request)
     {
         if ($request->selected == null) {
-            return redirect()->back()->with(['error', 'Please Select a Delegate To Be Edited!']);
+            return redirect()->back()->with(['error' => 'Please Select a Delegate To Be Edited!']);
         }
         if (count($request->selected) > 1) {
-            return redirect()->back()->with(['error', 'Please Select Only One Delegate!']);
+            return redirect()->back()->with(['error' => 'Please Select Only One Delegate!']);
         }
         $delegate = DB::table('delegates')->where('id', '=', $request->selected[0])->get()->first();
         return view('delegates.edit', compact('delegate'));
@@ -200,6 +207,8 @@ class DelegateController extends Controller
             'email' => 'required|email',
             'dob' => 'required',
             'phone_number' => 'required|max:11',
+            'id_front' => 'mimes:jpeg,png,jpg|max:1024',
+            'id_back' => 'mimes:jpeg,png,jpg|max:1024'
         ]);
         if ($request->id_front == null && $request->id_back != null) {
             $id_back = $request->id_back->getClientOriginalName();
@@ -275,17 +284,35 @@ class DelegateController extends Controller
 
     public function get_profile(Request $request)
     {
-        if ($request->selected == null) {
-            return redirect()->back()->with(['error' => 'Please select Delegate To View His Profile!']);
+        // dd($request);
+
+        $d1 = $d2 = $delegate = null;
+        if ($request->id == null) {
+            if ($request->selected == null) {
+                return redirect()->back()->with(['error' => 'Please select Delegate To View His Profile!']);
+            }
+            if (count($request->selected) > 1) {
+                return redirect()->back()->with(['error' => 'Please Select Only one Delegate!']);
+            }
+            $delegate = DB::table('delegates')->where('delegates.id', '=', $request->selected[0])->get()->first();
+            $d1 = DB::table('rooms')->where('delegate1', '=', $request->selected[0])->get()->first();
+            $d2 = DB::table('rooms')->where('delegate2', '=', $request->selected[0])->get()->first();
+        } else {
+            $delegate = DB::table('delegates')->where('delegates.id', '=', $request->id)->get()->first();
+            $d1 = DB::table('rooms')->where('delegate1', '=', $request->id)->get()->first();
+            $d2 = DB::table('rooms')->where('delegate2', '=', $request->id)->get()->first();
         }
-        if (count($request->selected) > 1) {
-            return redirect()->back()->with(['error' => 'Please Select Only one Delegate!']);
+        $room_number = null;
+        if ($d1 == null) {
+            $room_number = $d2;
+        } elseif ($d2 == null) {
+            $room_number = $d1;
         }
-        $delegate = DB::table('delegates')->join('payment', 'delegates.id', '=', 'payment.user_id')->where('delegates.id', '=', $request->selected[0])->get()->first();
         if ($delegate == null) {
             $delegate = DB::table('delegates')->where('id', '=', $request->selected[0])->get()->first();
         }
-        return view('delegates.profile', compact('delegate'));
+        $data = ['delegate' => $delegate, 'room_number' => $room_number];
+        return view('delegates.profile', compact('data'));
     }
 
     public function mark_checked_in(Request $request)

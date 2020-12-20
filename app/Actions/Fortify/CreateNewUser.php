@@ -32,7 +32,9 @@ class CreateNewUser implements CreatesNewUsers
         ]);
         if ($input['email'] == 'seifalaa143@gmail.com' || $input['email'] == 'mariamwael4@gmail.com' || $input['email'] == 'ahmedlabana72@gmail.com') {
             $user->attachRole('admin');
-        } else $user->attachRole('moderator');
+        } else {
+            $user->attachRole('moderator');
+        }
         return $user;
     }
 }

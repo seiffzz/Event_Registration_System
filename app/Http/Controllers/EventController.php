@@ -54,6 +54,7 @@ class EventController extends Controller
     public function register(Request $request, $event)
     {
 
+
         $id_front = $request->id_front->getClientOriginalName();
         $request->id_front->storeAs('ids', $id_front, 'public');
 
@@ -61,13 +62,12 @@ class EventController extends Controller
         $request->id_back->storeAs('ids', $id_back, 'public');
 
         $request->validate([
-
             'name' => 'required|regex:/^[\pL\s\-]+$/u',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:delegates,email',
             'dob' => 'required',
             'phone_number' => 'required|max:11',
-            'id_front' => 'required|file',
-            'id_back' => 'required|file',
+            'id_front' => 'required|mimes:jpeg,png,jpg|max:1024',
+            'id_back' => 'required|mimes:jpeg,png,jpg|max:1024',
         ]);
 
         Delegate::insert([
@@ -84,7 +84,8 @@ class EventController extends Controller
             'function' => $request->function,
             'event' => $event
         ]);
-        return true;
+        $message = 'success';
+        return view('confirmation',compact('message'));
     }
 
     public function pay(Request $request, $id)
@@ -97,6 +98,7 @@ class EventController extends Controller
             'transaction_receipt' => $request->transaction_receipt->getClientOriginalName(),
             'transaction_number' => $request->transaction_number
         ]);
-        return true;
+        $message = 'We Received Your Payment Confirmation!';
+        return view('confirmation',compact('message'));
     }
 }

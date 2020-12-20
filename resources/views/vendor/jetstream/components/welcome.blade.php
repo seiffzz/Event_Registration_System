@@ -39,11 +39,11 @@
             </div>
         </div>
     </div>
-    <div class="p-6 border-t border-gray-200 lg:col-span-2">
+    <div class="p-6 border-t border-gray-200 md:border-l">
         <div class="flex items-center">
             <img src="{{asset('storage/images/analytics.svg')}}" alt="" class="w-8 h-8 fill-current text-gray-400">
             <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold hover:text-blue-500"><a
-                    href="">Analytics</a></div>
+                    href="{{route('analytics.index')}}">Analytics</a></div>
         </div>
 
         <div class="ml-12">
@@ -56,5 +56,38 @@
             </div>
         </div>
     </div>
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <img src="{{asset('storage/images/group.svg')}}" alt="" class="w-8 h-8 fill-current text-gray-400">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold hover:text-blue-500"><a
+                    href="{{route('imports.index')}}">Accepted Delegates</a></div>
+        </div>
+
+        <div class="ml-12">
+            <div class="mt-2 text-sm text-gray-500">
+                <ul style="list-style-type:disc">
+                    <li>Import Names And Emails Of Accepted Delegates From Excel Sheet</li>
+                    <li>Send Personalized Registration From Links To Them</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     @endrole
+    <div class="p-6 border-t border-gray-200 md:border-l">
+        <div class="flex items-center">
+            <img src="{{asset('storage/images/room.svg')}}" alt="" class="w-8 h-8 fill-current text-gray-400">
+            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold hover:text-blue-500"><a
+                    href="{{route('rooms.index')}}">Rooms</a></div>
+        </div>
+
+        <div class="ml-12">
+            <div class="mt-2 text-sm text-gray-500">
+                <ul style="list-style-type:disc">
+                    <li>View All Rooms</li>
+                    <li>Set the Room Number</li>
+                    <li>Checkout Delegates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

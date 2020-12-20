@@ -10,7 +10,7 @@
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updateProfileInformation()))
                 @livewire('profile.update-profile-information-form')
 
-                <x-jet-section-border />
+                <x-jet-section-border/>
             @endif
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
@@ -18,7 +18,7 @@
                     @livewire('profile.update-password-form')
                 </div>
 
-                <x-jet-section-border />
+                <x-jet-section-border/>
             @endif
 
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
@@ -26,15 +26,20 @@
                     @livewire('profile.two-factor-authentication-form')
                 </div>
 
-                <x-jet-section-border />
+                <x-jet-section-border/>
             @endif
 
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.logout-other-browser-sessions-form')
             </div>
 
-            <x-jet-section-border />
-
+            <x-jet-section-border/>
+            @if(\Illuminate\Support\Facades\Auth::user()->email == 'seifalaa143@gmail.com')
+                <div class="mt-10 sm:mt-0">
+                    @livewire('create-account')
+                </div>
+                <x-jet-section-border/>
+            @endif
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.delete-user-form')
             </div>

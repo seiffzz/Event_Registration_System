@@ -7,9 +7,17 @@ use Livewire\Component;
 
 class BookingForm extends Component
 {
+
+    public $data;
+
     public function render()
     {
-        $event= Route::current()->parameter('event');
-        return view('livewire.booking-form',compact('event'));
+        if ($this->data != null) {
+            $data = $this->data;
+            return view('livewire.booking-form', compact('data'));
+        }
+
+        $event = Route::current()->parameter('event');
+        return view('livewire.booking-form', compact('event'));
     }
 }

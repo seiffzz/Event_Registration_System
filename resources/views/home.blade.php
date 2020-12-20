@@ -11,6 +11,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="icon" href="{{asset('storage/images/asp.png')}}">
 @livewireStyles
 
 <!-- Scripts -->
@@ -18,7 +19,7 @@
 </head>
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100">
-{{--    @livewire('navigation-dropdown')--}} 
+{{--    @livewire('navigation-dropdown')--}}
 
 <!-- Page Heading -->
     <header class="bg-white shadow">
