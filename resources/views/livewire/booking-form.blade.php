@@ -128,17 +128,15 @@
                     <x-jet-label class="font-semibold" for="role" value="{{ __('Role') }}"/>
                     <select name="role" id="role" class="mt-1 block w-full form-input" style="height: 44px"
                             onchange="show()">
-                        <option value="New Member" {{ (old("role") === 'New Member' ? "selected":"") }}>New Member
+                        <option value="Member" {{ (old("role") == 'Member' ? "selected":"") }}>Member
                         </option>
-                        <option value="Old Member" {{ (old("role") === 'Old Member' ? "selected":"") }}>Old Member
+                        <option value="TL" {{ (old("role") == 'TL' ? "selected":"") }}>TL</option>
+                        <option value="Coordinator" {{ (old("role") == 'Coordinator' ? "selected":"") }}>Coordinator
                         </option>
-                        <option value="TL" {{ (old("role") === 'TL' ? "selected":"") }}>TL</option>
-                        <option value="Coordinator" {{ (old("role") === 'Coordinator' ? "selected":"") }}>Coordinator
-                        </option>
-                        <option value="LCVP" {{ (old("role") === 'LCVP' ? "selected":"") }}>LCVP</option>
-                        <option value="LCP" {{ (old("role") === 'LCP' ? "selected":"") }}>LCP</option>
-                        {{--                    <option value="MCVP" {{ (old("role") === 'MCVP' ? "selected":"") }}>MCVP</option>--}}
-                        {{--                    <option value="MCP" {{ (old("role") === 'MCP' ? "selected":"") }}>MCP</option>--}}
+                        <option value="LCVP" {{ (old("role") == 'LCVP' ? "selected":"") }}>LCVP</option>
+                        <option value="LCP" {{ (old("role") == 'LCP' ? "selected":"") }}>LCP</option>
+                        {{--                    <option value="MCVP" {{ (old("role") == 'MCVP' ? "selected":"") }}>MCVP</option>--}}
+                        {{--                    <option value="MCP" {{ (old("role") == 'MCP' ? "selected":"") }}>MCP</option>--}}
                     </select>
                 </div>
             @endif
@@ -147,18 +145,18 @@
                     <x-jet-label class="font-semibold" for="function" value="{{ __('Function') }}"/>
                     <select
                         class="mt-1 block w-full form-input" style="height:44px;" id="grid-gender" name="function">
-                        <option value="IGV" {{ (old("function") === 'IGV' ? "selected":"") }}>IGV</option>
-                        <option value="IGTe" {{ (old("function") === 'IGTe' ? "selected":"") }}>IGTe</option>
-                        <option value="IGTa" {{ (old("function") === 'IGTa' ? "selected":"") }}>IGTa</option>
-                        <option value="OGTa" {{ (old("function") === 'OGTa' ? "selected":"") }}>OGTa</option>
-                        <option value="OGTe" {{ (old("function") === 'OGTe' ? "selected":"") }}>OGTe</option>
-                        <option value="OGV" {{ (old("function") === 'OGV' ? "selected":"") }}>OGV</option>
-                        <option value="TM" {{ (old("function") === 'TM' ? "selected":"") }}>TM</option>
-                        <option value="PD" {{ (old("function") === 'PD' ? "selected":"") }}>PD</option>
-                        <option value="Finance" {{ (old("function") === 'Finance' ? "selected":"") }}>Finance</option>
-                        <option value="BCX ICX" {{ (old("function") === 'BCX ICX' ? "selected":"") }}>BCX ICX</option>
-                        <option value="BCX OGX" {{ (old("function") === 'BCX OGX' ? "selected":"") }}>BCX OGX</option>
-                        <option value="R&D" {{ (old("function") === 'R&D' ? "selected":"") }}>R&D</option>
+                        <option value="IGV" {{ (old("function") == 'IGV' ? "selected":"") }}>IGV</option>
+                        <option value="IGTe" {{ (old("function") == 'IGTe' ? "selected":"") }}>IGTe</option>
+                        <option value="IGTa" {{ (old("function") == 'IGTa' ? "selected":"") }}>IGTa</option>
+                        <option value="OGTa" {{ (old("function") == 'OGTa' ? "selected":"") }}>OGTa</option>
+                        <option value="OGTe" {{ (old("function") == 'OGTe' ? "selected":"") }}>OGTe</option>
+                        <option value="OGV" {{ (old("function") == 'OGV' ? "selected":"") }}>OGV</option>
+                        <option value="TM" {{ (old("function") == 'TM' ? "selected":"") }}>TM</option>
+                        <option value="PD" {{ (old("function") == 'PD' ? "selected":"") }}>PD</option>
+                        <option value="Finance" {{ (old("function") == 'Finance' ? "selected":"") }}>Finance</option>
+                        <option value="BCX ICX" {{ (old("function") == 'BCX ICX' ? "selected":"") }}>BCX ICX</option>
+                        <option value="BCX OGX" {{ (old("function") == 'BCX OGX' ? "selected":"") }}>BCX OGX</option>
+                        <option value="R&D" {{ (old("function") == 'R&D' ? "selected":"") }}>R&D</option>
                     </select>
 
                 </div>
@@ -172,16 +170,11 @@
     </x-jet-authentication-card>
 </div>
 <script>
-    $('#form-3').submit(function (e) {
-        $(':disabled').each(function (e) {
-            $(this).removeAttr('disabled')
-        })
-    })
 
     function show() {
         var role = document.getElementById('role').value;
         if (role != 'Newbei') {
-            if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+            if (role == 'Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
                 document.getElementById('function-dropdown').className = 'mt-6'
             } else {
                 document.getElementById('function-dropdown').className = 'mt-6 hidden'
@@ -191,9 +184,8 @@
 
     window.onload = function () {
         var role = document.getElementById('role').value;
-        if (role != 'Newbie') {
-
-            if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+        if (role != 'Newbei') {
+            if (role == 'Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
                 document.getElementById('function-dropdown').className = 'mt-6'
             } else {
                 document.getElementById('function-dropdown').className = 'mt-6 hidden'

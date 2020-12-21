@@ -31,6 +31,7 @@ class EventController extends Controller
 
     public function save(EventRequest $request)
     {
+
         $file_name = $request->event_image->getClientOriginalName();
 
         $request->event_image->storeAs('event_images', $file_name, 'public');
@@ -53,7 +54,6 @@ class EventController extends Controller
 
     public function register(Request $request, $event)
     {
-
 
         $id_front = $request->id_front->getClientOriginalName();
         $request->id_front->storeAs('ids', $id_front, 'public');
@@ -81,11 +81,11 @@ class EventController extends Controller
             'allergies' => $request->allergies,
             'lc' => $request->lc,
             'role' => $request->role,
-            'function' => $request->function,
+            'function' => $request->role == 'Member' || $request->role == 'LCP' || $request->role == 'Newbei' ? null : $request->function,
             'event' => $event
         ]);
         $message = 'success';
-        return view('confirmation',compact('message'));
+        return view('confirmation', compact('message'));
     }
 
     public function pay(Request $request, $id)
@@ -99,6 +99,6 @@ class EventController extends Controller
             'transaction_number' => $request->transaction_number
         ]);
         $message = 'We Received Your Payment Confirmation!';
-        return view('confirmation',compact('message'));
+        return view('confirmation', compact('message'));
     }
 }

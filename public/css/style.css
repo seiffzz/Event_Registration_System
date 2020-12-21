@@ -25,7 +25,10 @@
 .card:hover .overlay {
     opacity: 1;
 }
-
+.disabled{
+    background-color: #E9ECEF;
+    pointer-events: none;
+}
 
 @media screen and (min-width: 768px) {
     #auth-card {
@@ -41,16 +44,15 @@
 
 #auth-card::-webkit-scrollbar-thumb {
     border-radius: 20px;
-    background-color: lightskyblue;
+    background-color: #60A5FA;
 }
 
 #auth-card::-webkit-scrollbar-thumb:hover {
     border-radius: 20px;
-    background-color: deepskyblue;
+    background-color: #93C5FD;
 }
 
 #auth-card::-webkit-scrollbar {
     width: 7px;
     background-color: white;
 }
-

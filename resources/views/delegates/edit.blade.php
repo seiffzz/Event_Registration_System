@@ -78,13 +78,9 @@
                             <x-jet-label for="function" value="{{ __('Role') }}"/>
                             <select name="role" id="role" class="mt-1 block w-full form-input" style="height: 44px"
                                     onclick="show()">
-                                <option value="New Member"
-                                        @if(old("role") == 'New Member' || $delegate->role == 'New Member')selected @endif>
-                                    New Member
-                                </option>
                                 <option value="Old Member"
-                                        @if(old("role") == 'Old Member' || $delegate->role == 'Old Member')selected @endif>
-                                    Old Member
+                                        @if(old("role") == 'Member' || $delegate->role == 'Member')selected @endif>
+                                    Member
                                 </option>
                                 <option value="TL"
                                         @if(old("role") == 'TL' || $delegate->role == 'TL')selected @endif>TL
@@ -199,7 +195,7 @@
 
     function show() {
         var role = document.getElementById('role').value;
-        if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+        if (role == 'Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
             document.getElementById('function-dropdown').className = 'mt-6'
         } else {
             document.getElementById('function-dropdown').className = 'mt-6 hidden'
@@ -208,7 +204,7 @@
 
     window.onload = function () {
         var role = document.getElementById('role').value;
-        if (role == 'Old Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
+        if (role == 'Member' || role == 'TL' || role == 'Coordinator' || role == 'LCVP') {
             document.getElementById('function-dropdown').className = 'mt-6'
         } else {
             document.getElementById('function-dropdown').className = 'mt-6 hidden'
